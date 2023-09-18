@@ -17,8 +17,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
 
 
+@login_required(login_url="auth:login")
 def index(request):
     context = {}
     return render(request=request, template_name="index.html", context=context)
@@ -26,5 +28,7 @@ def index(request):
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path(route="", view=index, name="index")
+    path(route="", view=index, name="index"),
+    path(route="", view=include(arg="apps.user_auth.urls")),
+    path(route="kontak/", view=include(arg="apps.kontak.urls"))
 ]
