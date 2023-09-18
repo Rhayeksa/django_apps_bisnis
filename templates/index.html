@@ -1,7 +1,33 @@
 {%extends "base.html"%} {%block apps%} {%include "components/navbar.html"%}
 
 <div class="container-fluid">
-  <h1>Home Index Page</h1>
+  <div class="h1">Kamu login sebagai : {{user}}</div>
+  <div class="d-flex flex-row mb-3">
+    <div class="card border-primary h-100 me-3" style="min-width: 20rem">
+      <div class="card-header text-bg-primary text-center h3">Kontak</div>
+      <div class="card-body text-light">
+        <a
+          href="{% url 'kontak:index' %}"
+          class="btn btn-primary card-title h5 d-grid gap-2"
+          >Open</a
+        >
+      </div>
+    </div>
+
+    <div class="card border-primary h-100 me-3" style="min-width: 20rem">
+      <div class="card-header text-bg-primary text-center h3">Inventori</div>
+      <div class="card-body text-light">
+        <a href="#" class="btn btn-primary card-title h5 d-grid gap-2">Open</a>
+      </div>
+    </div>
+
+    <div class="card border-primary h-100 me-3" style="min-width: 20rem">
+      <div class="card-header text-bg-primary text-center h3">Penjualan</div>
+      <div class="card-body text-light">
+        <a href="#" class="btn btn-primary card-title h5 d-grid gap-2">Open</a>
+      </div>
+    </div>
+  </div>
 </div>
 
 {%endblock apps%}
