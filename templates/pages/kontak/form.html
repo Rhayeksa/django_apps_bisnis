@@ -1,0 +1,133 @@
+{%extends "base.html"%} {%block apps%} {%include "pages/kontak/navbar.html"%}
+<div class="container-fluid">
+  <div class="card border-primary p-4">
+
+    <div class="row row-cols-auto">
+        <div class="h3 text-decoration-underline fst-italic col me-3">{{form}} Kontak</div>
+        <div class="col" {% if form != "Detail" %}hidden{% endif %}>
+            <a href="{% if form != 'Detail' %}#{% else %}{% url 'kontak:edit' data.id %}{% endif %}" class="btn btn-warning me-3">Edit</a>
+            <button
+                type="button"
+                class="btn btn-danger"
+                data-bs-toggle="modal"
+                data-bs-target="#modalDeleteData"
+            >Delete
+            </button>
+        </div>
+    </div>
+  
+    <form class="g-3 needs-validation" method="post" action="">
+      {% csrf_token %}  
+      <div class="mb-3">
+        <label for="inputNama" class="form-label">Nama</label>
+        <input
+          type="text"
+          class="form-control"
+          id="inputNama"
+          name="nama"
+          required
+          value="{{data.nama}}"
+          {% if form == "Detail" %}disabled{% endif %}
+        />
+      </div>
+      <div class="mb-3">
+        <label for="inputEmail" class="form-label">Email</label>
+        <input
+          type="email"
+          class="form-control"
+          id="inputEmail"
+          name="email"
+          required
+          value="{{data.email}}"
+          {% if form == "Detail" %}disabled{% endif %}
+        />
+      </div>
+      <div class="mb-3">
+        <label for="inputGender" class="mb-2">Choose Gender</label>
+        <select
+          class="form-select"
+          id="inputGender"
+          name="gender"
+          required
+          {% if form == "Detail" %}disabled{% endif %}
+        >
+          {% if form == "Add" %}
+          <option value=""></option>
+          {% for op, ops in gender %}
+          <option value="{{op}}">{{op}}</option>
+          {% endfor %} {% else %} {% for op, ops in gender %}
+          <option {% if op == data.gender %}selected{% endif %} value="{{op}}">
+            {{op}}
+          </option>
+          {% endfor %} {% endif %}
+        </select>
+      </div>
+      <div class="mb-3">
+        <label for="inputPhone" class="form-label">Phone</label>
+        <input
+          type="tel"
+          class="form-control"
+          id="inputPhone"
+          name="phone"
+          required
+          value="{{data.phone}}"
+          {% if form == "Detail" %}disabled{% endif %}
+        />
+      </div>
+      <div class="mb-3">
+        <label for="inputAlamat" class="form-label">Alamat</label>
+        <textarea
+          class="form-control"
+          id="inputAlamat"
+          rows="3"
+          name="alamat"
+          required
+          {% if form == "Detail" %}disabled{% endif %}
+        >{{data.alamat}}</textarea>
+      </div>
+      <div {% if form == "Detail" %}hidden{% endif %}>
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="reset" class="btn btn-secondary">Reset</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Modal Delete -->
+<div
+  class="modal fade"
+  id="modalDeleteData"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-primary">
+        <h1 class="modal-title fs-5 text-white" id="exampleModalLabel">
+          Peringatan
+        </h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        Apakah Kamu yakin akan menghapus data tersebut...?
+      </div>
+      <div class="modal-footer">
+        <a href="{% if form != 'Detail' %}#{% else %}{% url 'kontak:delete' data.id %}{% endif %}" class="btn btn-danger"
+          >Iya</a
+        >
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Tidak
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+{%endblock apps%}

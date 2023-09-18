@@ -1,0 +1,43 @@
+{%extends "base.html"%} {%block apps%} {%include "pages/kontak/navbar.html"%}
+<div class="container-fluid">
+  <div class="card border-primary p-4">
+    <div class="h3 text-decoration-underline fst-italic">
+      Edit Kontak {{id}}
+    </div>
+    <form class="g-3" method="post" action="{% url 'kontak:index' %}">
+      {% csrf_token %}
+      <div class="mb-3">
+        <label for="inputNama" class="form-label">Nama</label>
+        <input type="text" class="form-control" id="inputNama" name="nama" />
+      </div>
+      <div class="mb-3">
+        <label for="inputEmail" class="form-label">Email</label>
+        <input type="email" class="form-control" id="inputEmail" name="email" />
+      </div>
+      <div class="mb-3">
+        <label for="inputGender" class="mb-2">Choose Gender</label>
+        <select class="form-select" id="inputGender" name="gender">
+          <option value="Pria">Pria</option>
+          <option value="Wanita">Wanita</option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <label for="inputPhone" class="form-label">Phone</label>
+        <input type="tel" class="form-control" id="inputPhone" name="phone" />
+      </div>
+      <div class="mb-3">
+        <label for="inputAlamat" class="form-label">Alamat</label>
+        <textarea
+          class="form-control"
+          id="inputAlamat"
+          rows="3"
+          name="alamat"
+        ></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+      <button type="reset" class="btn btn-secondary">Reset</button>
+    </form>
+  </div>
+</div>
+
+{%endblock apps%}

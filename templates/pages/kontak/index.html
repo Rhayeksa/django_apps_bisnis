@@ -1,1 +1,41 @@
- 
+{%extends "base.html"%} {%block apps%} {%include "pages/kontak/navbar.html"%}
+<div class="container-fluid">
+  <a href="{% url 'kontak:add' %}" class="btn btn-primary mb-3">Add</a>
+  <div class="table-responsive-xxl">
+    <table class="table">
+      <thead class="table-primary">
+        <tr>
+          <th scope="col" class="text-center">#</th>
+          <th scope="col">Nama</th>
+          <th scope="col">Email</th>
+          <th scope="col">Phone</th>
+          <th scope="col">Gender</th>
+          <th scope="col" colspan="3" class="text-center">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for data in datas %}
+        <tr>
+          <th scope="row" class="text-center">{{forloop.counter}}</th>
+          <td>{{data.nama}}</td>
+          <td>{{data.email}}</td>
+          <td>{{data.phone}}</td>
+          <td>{{data.gender}}</td>
+          <td class="text-center" style="width: 0px">
+            <a href="{% url 'kontak:detail' data.id %}" class="btn btn-primary"
+              >Detail</a
+            >
+          </td>
+          <td class="text-center" style="width: 0px">
+            <a href="{% url 'kontak:edit' data.id %}" class="btn btn-warning"
+              >Edit</a
+            >
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+{%endblock apps%}

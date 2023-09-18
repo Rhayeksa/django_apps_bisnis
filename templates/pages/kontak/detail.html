@@ -1,0 +1,83 @@
+{%extends "base.html"%} {%block apps%} {%include "pages/kontak/navbar.html"%}
+<div class="container-fluid">
+  <div class="card border-primary p-4">
+    <div class="row row-cols-auto">
+      <div class="h3 text-decoration-underline fst-italic col me-3">
+        Detail Kontak
+      </div>
+      <div class="col">
+        <a href="{% url 'kontak:edit' 1 %}" class="btn btn-warning me-3"
+          >Edit</a
+        >
+        <button
+          type="button"
+          class="btn btn-danger"
+          data-bs-toggle="modal"
+          data-bs-target="#modalDeleteData"
+        >
+          Delete
+        </button>
+      </div>
+    </div>
+    <div class="mb-3">
+      <div class="p">Nama</div>
+      <div class="p card p-2 bg-body-secondary">{{data.nama}}</div>
+    </div>
+    <div class="mb-3">
+      <div class="p">Email</div>
+      <div class="p card p-2 bg-body-secondary">{{data.email}}</div>
+    </div>
+    <div class="mb-3">
+      <div class="p">Gender</div>
+      <div class="p card p-2 bg-body-secondary">{{data.gender}}</div>
+    </div>
+    <div class="mb-3">
+      <div class="p">Phone</div>
+      <div class="p card p-2 bg-body-secondary">{{data.phone}}</div>
+    </div>
+    <div class="mb-3">
+      <div class="p">Alamat</div>
+      <div class="p card p-2 bg-body-secondary" style="height: 90px">
+        {{data.alamat}}
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Delete -->
+<div
+  class="modal fade"
+  id="modalDeleteData"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-primary">
+        <h1 class="modal-title fs-5 text-white" id="exampleModalLabel">
+          Peringatan
+        </h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        Apakah Kamu yakin akan menghapus data tersebut...?
+      </div>
+      <div class="modal-footer">
+        <a href="{% url 'kontak:delete' data.id %}" class="btn btn-danger"
+          >Iya</a
+        >
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Tidak
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+{%endblock apps%}
