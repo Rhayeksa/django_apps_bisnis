@@ -23,8 +23,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-$(nc6dhvu=+5wt9q$y&9*#m1^lejv0+q%-95h5s_t45v@z&d$a'
 
 # SECURITY WARNING: don't run with debug turned on in production!
+# DEBUG = False
 DEBUG = True
 
+# ALLOWED_HOSTS = ["*"]
 ALLOWED_HOSTS = []
 
 
@@ -40,6 +42,7 @@ INSTALLED_APPS = [
     'apps.kontak',
     'apps.inventori',
     'apps.penjualan',
+    'apps.user_auth',
 ]
 
 MIDDLEWARE = [
