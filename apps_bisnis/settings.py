@@ -21,16 +21,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Configuration environment
 env = dotenv_values(dotenv_path="/".join([str(BASE_DIR), ".env"]))
 
-print("\n\n", os.environ["X"] if os.environ.get(
-    "X") != None else env["X"], "\n\n")
+print("\n\n", os.environ.get("X", default=env["X"]), "\n\n")
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
 # SECRET_KEY = 'django-insecure-$(nc6dhvu=+5wt9q$y&9*#m1^lejv0+q%-95h5s_t45v@z&d$a'
-SECRET_KEY = os.environ["DJANGO_SECRET_KEY"] if os.environ.get(
-    "DJANGO_SECRET_KEY") != None else env["DJANGO_SECRET_KEY"]
+SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", env["DJANGO_SECRET_KEY"])
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = False
@@ -95,12 +93,12 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     },
     # "default": {
-    #     "ENGINE": "django.db.backends.postgresql",
-    #     "NAME": os.environ["DB_POSTGRESQL_NAME"] if os.environ.get("DB_POSTGRESQL_NAME") != None else env["DB_POSTGRESQL_NAME"],
-    #     "USER": os.environ["DB_POSTGRESQL_USER"] if os.environ.get("DB_POSTGRESQL_USER") != None else env["DB_POSTGRESQL_USER"],
-    #     "PASSWORD": os.environ["DB_POSTGRESQL_PASSWORD"] if os.environ.get("DB_POSTGRESQL_PASSWORD") != None else env["DB_POSTGRESQL_PASSWORD"],
-    #     "HOST": os.environ["DB_POSTGRESQL_HOST"] if os.environ.get("DB_POSTGRESQL_HOST") != None else env["DB_POSTGRESQL_HOST"],
-    #     "PORT": os.environ["DB_POSTGRESQL_PORT"] if os.environ.get("DB_POSTGRESQL_PORT") != None else env["DB_POSTGRESQL_PORT"],
+    # "ENGINE": "django.db.backends.postgresql",
+    # "NAME": os.environ.get("DB_POSTGRESQL_NAME", default=env["DB_POSTGRESQL_NAME"]),
+    # "USER": os.environ.get("DB_POSTGRESQL_USER", default=env["DB_POSTGRESQL_USER"]),
+    # "PASSWORD": os.environ.get("DB_POSTGRESQL_PASSWORD", default=env["DB_POSTGRESQL_PASSWORD"]),
+    # "HOST": os.environ.get("DB_POSTGRESQL_HOST", default=env["DB_POSTGRESQL_HOST"]),
+    # "PORT": os.environ.get("DB_POSTGRESQL_PORT", default=env["DB_POSTGRESQL_PORT"]),
     # }
 }
 
