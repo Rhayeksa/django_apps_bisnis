@@ -21,8 +21,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Configuration environment
 env = dotenv_values(dotenv_path="/".join([str(BASE_DIR), ".env"]))
 
-print("\n\n", os.environ.get("X", default=env["X"]), "\n\n")
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
