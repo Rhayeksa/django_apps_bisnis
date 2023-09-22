@@ -1,17 +1,42 @@
-from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import User
+from django.shortcuts import redirect, render
 
 
 def signup(request):
-    context = {}
-    return render(request=request, template_name="pages/auth/signup.html", context=context)
+    context = {"alert": "hidden"}
+    if request.method == "POST":
+        username = request.POST["username"]
+        email = request.POST["email"]
+        password = request.POST["password"]
+
+        check_username = User.objects.filter(username=username).exists()
+        print("\n\n", check_username, "\n\n")
+        check_email = User.objects.filter(email=email).exists()
+        if check_username:
+            context = {
+                "alert": "",
+                "msg": "Username sudah terdaftar"
+            }
+        elif check_email:
+            context = {
+                "alert": "",
+                "msg": "Email sudah terdaftar"
+            }
+        else:
+            print("\n\n", "uniq lah", "\n\n")
+            User.objects.create_user(
+                username=username,
+                email=email,
+                password=password
+            )
+            return redirect(to="auth:login")
+    return render(request=request, template_name="user_auth/signup.html", context=context)
 
 
 def login_view(request):
-    context = {
-        "alert": "hidden",
-        "msg": "",
-    }
+    context = {"alert": "hidden"}
+
     if request.method == "POST":
         username = request.POST["username"]
         password = request.POST["password"]
@@ -25,7 +50,7 @@ def login_view(request):
                 "msg": "username atau password salah",
             }
 
-    return render(request=request, template_name="pages/auth/login.html", context=context)
+    return render(request=request, template_name="user_auth/login.html", context=context)
 
 
 def logout_view(request):

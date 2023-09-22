@@ -11,7 +11,7 @@ def index(request):
 
     context = {"data": data}
 
-    return render(request=request, template_name="pages/kontak/index.html", context=context)
+    return render(request=request, template_name="kontak/index.html", context=context)
 
 
 @login_required(login_url="auth:login")
@@ -25,7 +25,7 @@ def add(request):
 
     context = {"data": data}
 
-    return render(request=request, template_name="pages/kontak/add.html", context=context)
+    return render(request=request, template_name="kontak/add.html", context=context)
 
 
 @login_required(login_url="auth:login")
@@ -34,7 +34,7 @@ def detail(request, id):
 
     context = {"data": data}
 
-    return render(request=request, template_name="pages/kontak/detail.html", context=context)
+    return render(request=request, template_name="kontak/detail.html", context=context)
 
 
 @login_required(login_url="auth:login")
@@ -62,7 +62,7 @@ def edit(request, id):
 
     context = {"data": data}
 
-    return render(request=request, template_name="pages/kontak/edit.html", context=context)
+    return render(request=request, template_name="kontak/edit.html", context=context)
 
 
 @login_required(login_url="auth:login")
