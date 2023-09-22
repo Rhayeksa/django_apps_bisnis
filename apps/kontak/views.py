@@ -7,78 +7,62 @@ from .models.kontak import Kontak as KontakModel
 
 @login_required(login_url="auth:login")
 def index(request):
-    datas = KontakModel.objects.all()
+    data = KontakModel.objects.all()
 
-    context = {
-        "datas": datas,
-    }
+    context = {"data": data}
 
     return render(request=request, template_name="pages/kontak/index.html", context=context)
 
 
 @login_required(login_url="auth:login")
 def add(request):
-    data = KontakModel()
-
-    context = {
-        "form": "Add",
-        "data": data,
-        "gender": KontakModel.GENDER,
-    }
+    data = KontakForm(request.POST or None)
 
     if request.method == "POST":
-        data = KontakModel(
-            nama=request.POST["nama"],
-            email=request.POST["email"],
-            gender=request.POST["gender"],
-            phone=request.POST["phone"],
-            alamat=request.POST["alamat"]
-        )
-        data.save()
-        return redirect(to="kontak:index")
+        if data.is_valid():
+            data.save()
+            return redirect(to="kontak:index")
 
-    # return render(request=request, template_name="pages/kontak/add.html", context=context)
-    return render(request=request, template_name="pages/kontak/form.html", context=context)
+    context = {"data": data}
+
+    return render(request=request, template_name="pages/kontak/add.html", context=context)
 
 
 @login_required(login_url="auth:login")
 def detail(request, id):
     data = KontakModel.objects.get(id=id)
 
-    context = {
-        "form": "Detail",
-        "data": data,
-        "gender": KontakModel.GENDER,
-        "disabled": "disabled",
-        "hidden": "hidden"
-    }
+    context = {"data": data}
 
-    # return render(request=request, template_name="pages/kontak/detail.html", context=context)
-    return render(request=request, template_name="pages/kontak/form.html", context=context)
+    return render(request=request, template_name="pages/kontak/detail.html", context=context)
 
 
 @login_required(login_url="auth:login")
 def edit(request, id):
-    data = KontakModel.objects.get(id=id)
+    model = KontakModel.objects.get(id=id)
 
-    data.nama = request.POST["nama"] if request.method == "POST" else data.nama
-    data.email = request.POST["email"] if request.method == "POST" else data.email
-    data.gender = request.POST["gender"] if request.method == "POST" else data.gender
-    data.phone = request.POST["phone"] if request.method == "POST" else data.phone
-    data.alamat = request.POST["alamat"] if request.method == "POST" else data.alamat
-
-    if request.method == "POST":
-        data.save()
-        return redirect(to="kontak:index")
-
-    context = {
-        "form": "Edit",
-        "data": data,
-        "gender": KontakModel.GENDER,
+    initial = {
+        "nama": model.nama,
+        "email": model.email,
+        "gender": model.gender,
+        "phone": model.phone,
+        "alamat": model.alamat,
     }
 
-    # return render(request=request, template_name="pages/kontak/add_edit_lab.html", context=context)
-    return render(request=request, template_name="pages/kontak/form.html", context=context)
+    data = KontakForm(
+        data=request.POST or None,
+        initial=initial,
+        instance=model
+    )
+
+    if request.method == "POST":
+        if data.is_valid():
+            data.save()
+            return redirect(to="kontak:detail", id=model.id)
+
+    context = {"data": data}
+
+    return render(request=request, template_name="pages/kontak/edit.html", context=context)
 
 
 @login_required(login_url="auth:login")
