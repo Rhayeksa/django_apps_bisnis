@@ -11,7 +11,6 @@ def signup(request):
         password = request.POST["password"]
 
         check_username = User.objects.filter(username=username).exists()
-        print("\n\n", check_username, "\n\n")
         check_email = User.objects.filter(email=email).exists()
         if check_username:
             context = {
@@ -24,7 +23,6 @@ def signup(request):
                 "msg": "Email sudah terdaftar"
             }
         else:
-            print("\n\n", "uniq lah", "\n\n")
             User.objects.create_user(
                 username=username,
                 email=email,

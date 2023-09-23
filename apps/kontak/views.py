@@ -19,8 +19,6 @@ def index(request):
         data = paginator.page(number=1)
     except EmptyPage:
         data = paginator.page(paginator.num_pages)
-    print("\n\n", data, "\n\n")
-    # data = paginator
 
     context = {"data": data}
 
