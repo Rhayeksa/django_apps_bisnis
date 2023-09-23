@@ -1,4 +1,5 @@
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.shortcuts import redirect, render
 
 from .forms.kontak import Kontak as KontakForm
@@ -7,7 +8,19 @@ from .models.kontak import Kontak as KontakModel
 
 @login_required(login_url="auth:login")
 def index(request):
-    data = KontakModel.objects.all()
+    model = KontakModel.objects.all().order_by("-id")
+    page = request.GET.get("page", 1)
+
+    paginator = Paginator(object_list=model, per_page=5)
+
+    try:
+        data = paginator.page(number=page)
+    except PageNotAnInteger:
+        data = paginator.page(number=1)
+    except EmptyPage:
+        data = paginator.page(paginator.num_pages)
+    print("\n\n", data, "\n\n")
+    # data = paginator
 
     context = {"data": data}
 
