@@ -6,20 +6,15 @@ from ..models.kontak import Kontak as KontakModel
 class Kontak(forms.ModelForm):
     class Meta:
         model = KontakModel
-        fields = [
-            "nama",
-            "email",
-            "gender",
-            "phone",
-            "alamat",
-        ]
+        fields = "__all__"
         widgets = {
             "nama": forms.TextInput(
                 attrs={
-                    "class": "form-control"
+                    "class": "form-control",
+                    "autofocus": "autofocus"
                 }
             ),
-            "email": forms.TextInput(
+            "email": forms.EmailInput(
                 attrs={
                     "class": "form-control"
                 }

@@ -27,25 +27,21 @@ def index(request):
 
 @login_required(login_url="auth:login")
 def add(request):
-    data = KontakForm(request.POST or None)
+    form = KontakForm(request.POST or None)
 
     if request.method == "POST":
-        if data.is_valid():
-            data.save()
+        if form.is_valid():
+            form.save()
             return redirect(to="kontak:index")
 
-    context = {"data": data}
-
-    return render(request=request, template_name="kontak/add.html", context=context)
+    return render(request=request, template_name="kontak/add.html", context={"form": form})
 
 
 @login_required(login_url="auth:login")
 def detail(request, id):
-    data = KontakModel.objects.get(id=id)
+    model = KontakModel.objects.get(id=id)
 
-    context = {"data": data}
-
-    return render(request=request, template_name="kontak/detail.html", context=context)
+    return render(request=request, template_name="kontak/detail.html", context={"data": model})
 
 
 @login_required(login_url="auth:login")
@@ -60,20 +56,18 @@ def edit(request, id):
         "alamat": model.alamat,
     }
 
-    data = KontakForm(
+    form = KontakForm(
         data=request.POST or None,
         initial=initial,
         instance=model
     )
 
     if request.method == "POST":
-        if data.is_valid():
-            data.save()
+        if form.is_valid():
+            form.save()
             return redirect(to="kontak:detail", id=model.id)
 
-    context = {"data": data}
-
-    return render(request=request, template_name="kontak/edit.html", context=context)
+    return render(request=request, template_name="kontak/edit.html", context={"form": form})
 
 
 @login_required(login_url="auth:login")

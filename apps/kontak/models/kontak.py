@@ -13,4 +13,4 @@ class Kontak(models.Model):
     email = models.EmailField(max_length=225, unique=True)
     gender = models.CharField(max_length=9, choices=GENDER)
     phone = models.CharField(max_length=20)
-    alamat = models.TextField()
+    alamat = models.TextField(null=True, blank=True)
