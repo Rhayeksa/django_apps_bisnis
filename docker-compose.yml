@@ -1,0 +1,24 @@
+version: "3"
+services:
+  web:
+    container_name: django_app_bisnis
+    build: .
+    depends_on:
+      - db
+    ports:
+      - "9001:8000"
+    environment:
+      - HOST=db
+      - USER=odoo16
+      - PASSWORD=odoo16
+    # restart: always
+  db:
+    container_name: db_django_app_bisnis
+    image: postgres:15
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_PASSWORD=odoo16
+      - POSTGRES_USER=odoo16
+    ports:
+      - "5491:5432"
+    # restart: always
