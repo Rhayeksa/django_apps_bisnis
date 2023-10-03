@@ -1,24 +1,118 @@
-<nav class="navbar navbar-expand-xl bg-primary mb-3" data-bs-theme="dark">
+<nav class="navbar navbar-dark bg-primary mb-3">
   <div class="container-fluid">
     <a class="navbar-brand" href="{% url 'index' %}">Apps Bisnis</a>
+    <ul class="navbar-nav m-auto">
+      <li class="nav-item">
+        <a class="nav-link active" href="{% url 'kontak:index' %}">Kontak</a>
+      </li>
+    </ul>
     <button
       class="navbar-toggler"
       type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent"
-      aria-expanded="false"
+      data-bs-toggle="offcanvas"
+      data-bs-target="#offcanvasDarkNavbar"
+      aria-controls="offcanvasDarkNavbar"
       aria-label="Toggle navigation"
     >
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link active" href="{% url 'kontak:index' %}">Kontak</a>
-        </li>
-      </ul>
-      <a href="{% url 'auth:logout' %}" class="btn btn-outline-light">Logout</a>
+    <div
+      class="offcanvas offcanvas-end text-bg-primary"
+      tabindex="-1"
+      id="offcanvasDarkNavbar"
+      aria-labelledby="offcanvasDarkNavbarLabel"
+    >
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">
+          Hello {{user}}. Have a nice day
+        </h5>
+        <button
+          type="button"
+          class="btn-close btn-close-white"
+          data-bs-dismiss="offcanvas"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="offcanvas-body">
+        <ul class="navbar-nav flex-grow-1 me-auto">
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              Kontak
+            </a>
+            <ul class="dropdown-menu">
+              <li data-bs-dismiss="offcanvas">
+                <a class="dropdown-item" href="{% url 'kontak:index' %}"
+                  >Kontak</a
+                >
+              </li>
+              <li>
+                <hr class="dropdown-divider" />
+              </li>
+              <li data-bs-dismiss="offcanvas">
+                <a class="dropdown-item" href="{% url 'kontak:add' %}"
+                  >Kontak Add</a
+                >
+              </li>
+            </ul>
+          </li>
+          <hr />
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              Inventaris
+            </a>
+            <ul class="dropdown-menu">
+              <li data-bs-dismiss="offcanvas">
+                <a class="dropdown-item" href="#">Inventaris</a>
+              </li>
+              <li>
+                <hr class="dropdown-divider" />
+              </li>
+              <li data-bs-dismiss="offcanvas">
+                <a class="dropdown-item" href="#">Inventaris Add</a>
+              </li>
+            </ul>
+          </li>
+          <hr />
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              Penjualan
+            </a>
+            <ul class="dropdown-menu">
+              <li data-bs-dismiss="offcanvas">
+                <a class="dropdown-item" href="#">Penjualan</a>
+              </li>
+              <li>
+                <hr class="dropdown-divider" />
+              </li>
+              <li data-bs-dismiss="offcanvas">
+                <a class="dropdown-item" href="#">Penjualan Add</a>
+              </li>
+            </ul>
+          </li>
+          <hr />
+        </ul>
+        <div class="d-grid gap-2">
+          <a href="#" class="border btn btn-primary">Logout</a>
+        </div>
+      </div>
     </div>
   </div>
 </nav>
