@@ -9,6 +9,7 @@ from .models.kontak import Kontak as KontakModel
 @login_required(login_url="auth:login")
 def index(request):
     model = KontakModel.objects.all().order_by("-id")
+    # model = KontakModel.objects.using('asdf').all().order_by("-id")
     page = request.GET.get("page", 1)
 
     paginator = Paginator(object_list=model, per_page=5)
@@ -71,6 +72,6 @@ def edit(request, id):
 
 
 @login_required(login_url="auth:login")
-def detele(request, id):
+def delete(request, id):
     KontakModel.objects.filter(id=id).delete()
     return redirect(to="kontak:index")

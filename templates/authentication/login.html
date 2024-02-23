@@ -1,0 +1,53 @@
+{% extends "base.html" %} {% block apps %}
+
+<div class="position-absolute top-50 start-50 translate-middle">
+  <div class="card border-primary">
+    <div class="card-header text-center text-bg-primary">
+      <div class="h5">Login</div>
+    </div>
+    <div class="card-body">
+      <form action="" method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+          <label for="username" class="form-label">Username</label>
+          <input
+            type="text"
+            class="form-control"
+            id="username"
+            name="username"
+            required
+          />
+        </div>
+        <div class="mb-3">
+          <label for="pwd" class="form-label">Password</label>
+          <input
+            type="password"
+            class="form-control"
+            id="pwd"
+            name="password"
+            required
+          />
+        </div>
+        <div class="alert alert-danger" role="alert" {{alert}}>{{msg}}</div>
+        <div class="d-grid gap-2">
+          <button type="submit" class="btn btn-primary btn-block">
+            Submit
+          </button>
+        </div>
+      </form>
+      <hr class="border border-primary" />
+      <div class="text-end">
+        <small class="text-body-secondary">
+          Belum punya akun?
+          <a
+            href="{% url 'auth:sign_up' %}"
+            class="text-right text-decoration-none"
+            >Daftar disini</a
+          >
+        </small>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock apps %}

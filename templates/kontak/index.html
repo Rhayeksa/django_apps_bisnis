@@ -7,31 +7,36 @@
       </a>
     </div>
     <div class="col">
-      <div>{% if data.has_other_pages %}</div>
+      {% if data.has_other_pages %}
       <ul class="pagination">
-        <div>{% if data.has_previous %}</div>
-        <li class="page-item">
-          <a class="page-link" href="?page={{ data.previous_page_number }}"
-            >Previous</a
-          >
-        </li>
-        <div>{% else %}</div>
-        <li class="disabled page-item">
-          <a class="page-link" href="#">Previous</a>
-        </li>
-        <div>{% endif %}</div>
+        <div>
+          {% if data.has_previous %}
+          <li class="page-item">
+            <a class="page-link" href="?page={{ data.previous_page_number }}"
+              >Previous</a
+            >
+          </li>
+          {% else %}
+          <li class="disabled page-item">
+            <a class="page-link" href="#">Previous</a>
+          </li>
+          {% endif %}
+        </div>
 
-        <div>{% for i in data.paginator.page_range %}</div>
-        <div>{% if data.number == i %}</div>
-        <li class="active page-item">
-          <a class="page-link" href="?page={{ i }}">{{ i }}</a>
-        </li>
-        <div>{% else %}</div>
-        <li class="page-item">
-          <a class="page-link" href="?page={{ i }}">{{ i }}</a>
-        </li>
-        <div>{% endif %}</div>
-        <div>{% endfor %}</div>
+          {% for i in data.paginator.page_range %}
+          <!-- <div> -->
+          {% if data.number == i %}
+          <li class="active page-item">
+            <a class="page-link" href="?page={{ i }}">{{ i }}</a>
+          </li>
+          {% else %}
+          <li class="page-item">
+            <a class="page-link" href="?page={{ i }}">{{ i }}</a>
+          </li>
+          {% endif %}
+          <!-- </div> -->
+          {% endfor %}
+          <!-- </div> -->
 
         <div>{% if data.has_next %}</div>
         <li class="page-item">
@@ -43,7 +48,7 @@
         </li>
         <div>{% endif %}</div>
       </ul>
-      <div>{% endif %}</div>
+      {% endif %}
     </div>
   </div>
   <div class="table-responsive-xxl">

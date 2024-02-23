@@ -1,7 +1,9 @@
 <nav class="navbar navbar-dark bg-primary mb-3">
   <div class="container-fluid">
-    <a class="navbar-brand" href="{% url 'index' %}">Apps Bisnis</a>
-    <span class="text-white ms-auto me-3">Hello {{user}}. Have a nice day</span>
+    <a class="navbar-brand h1" href="{% url 'index' %}">Apps Bisnis</a>
+    <span class="text-white ms-auto me-3 h6"
+      >Hello {{user}}. Have a nice day</span
+    >
     {% include "components/navbar_link_offcanvas.html" %}
   </div>
 </nav>

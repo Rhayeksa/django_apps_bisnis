@@ -23,9 +23,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-0w#*z%d7=q)&sq5pl1mg7b0qtytosle%pp-6w^3^=9gbv1!l9l'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -41,6 +43,7 @@ INSTALLED_APPS = [
     'apps.penjualan',
     'apps.inventaris',
     'apps.user_auth',
+    'apps.authentication',
 ]
 
 MIDDLEWARE = [

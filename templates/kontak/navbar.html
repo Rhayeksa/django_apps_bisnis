@@ -1,11 +1,15 @@
 <nav class="navbar navbar-dark bg-primary mb-3">
   <div class="container-fluid">
-    <a class="navbar-brand" href="{% url 'index' %}">Apps Bisnis</a>
-    <ul class="navbar-nav m-auto">
-      <li class="nav-item">
-        <a class="nav-link active" href="{% url 'kontak:index' %}">Kontak</a>
-      </li>
-    </ul>
+    <a class="navbar-brand h1" href="{% url 'index' %}">Apps Bisnis</a>
+    <div class="d-none d-sm-block">
+      <ul class="nav">
+        <li class="nav-item">
+          <a class="nav-link active text-white" href="{% url 'kontak:index' %}"
+            >Kontak</a
+          >
+        </li>
+      </ul>
+    </div>
     {% include "components/navbar_link_offcanvas.html" %}
   </div>
 </nav>
